@@ -26,8 +26,7 @@ public class Program {
 				addParty(scan, m);
 				break;
 			case 4:
-				System.out
-				.println("You chose to add a new contender to a party\nIs it already an existing citizen? Y/N");
+				System.out.println("You chose to add a new contender to a party\nIs it already an existing citizen? Y/N");
 				String ch;
 				ch = scan.next();
 				if (ch.charAt(0) == 'Y' || ch.charAt(0) == 'y') {
@@ -53,7 +52,8 @@ public class Program {
 				} else if (ch.charAt(0) == 'N' || ch.charAt(0) == 'n') {
 					System.out.println(
 							"Please enter his name, id, year of born, if he is in quarantine (true/false), number of ballot box and what party is he contending to");
-					Contender co = new Contender(scan.next(), scan.next(), scan.nextInt(), scan.nextBoolean(), scan.next(), true);
+					Contender co = new Contender(scan.next(), scan.next(), scan.nextInt(), scan.nextBoolean(),
+							scan.next(), true);
 					do {
 						exist = false;
 						for (int i = 0; i < m.getCitizens().size(); i++) {
@@ -70,7 +70,7 @@ public class Program {
 					for (int i = 0; i < m.getParties().size(); i++) {
 						if (m.getParties().get(i).getName().equals(co.getPartyBelonging())) {
 							m.getParties().get(i).getContenders().add(co);
-							System.out.println("Contender added succesfully");
+							System.out.println("Contender Added Succesfully");
 						}
 					}
 				} else {
@@ -90,45 +90,52 @@ public class Program {
 			case 7:
 				showParties(m);
 				break;
-				//			case 8:
-				//				System.out.println("You chose to set a new election\nPlease enter month and year of the election");
-				//				Election e = new Election(scan.nextInt(), scan.nextInt(), m.getCitizens(), m.getParties(),
-				//						m.getBoxes());
-				//				do {
-				//					exist = false;
-				//					for (int i = 0; i < m.getElections().size(); i++) {
-				//						if (m.getElections().get(i).equals(e))
-				//							exist = true;
-				//					}
-				//					if (exist) {
-				//						System.out.println("Election already exist in thath date\nPlease enter details again");
-				//						e = new Election(scan.nextInt(), scan.nextInt(), m.getCitizens(), m.getParties(), m.getBoxes());
-				//					}
-				//				} while (exist);
-				//				m.addElection(e);
-				//				System.out.println("Please enter for every citizen his vote - true/false");
-				//				String vote;
-				//				for (int i = 0; i < m.getCitizens().size(); i++) {
-				//					System.out.println("is " + m.getCitizens().get(i).toString() + " want to vote?");
-				//					m.getCitizens().get(i).setIsVoting(scan.nextBoolean());
-				//					if (m.getCitizens().get(i).getIsVoting()) {
-				//						System.out.println("Which party is the citizen voting for? enter a party name");
-				//						for (int j = 0; j < m.getParties().size(); j++)
-				//							System.out.print(m.getParties().get(j).toString());
-				//						vote = scan.next();
-				//						m.getCitizens().get(i).setLastVote(vote);
-				//					}
-				//				}
-				//				for (int i = 0; i < m.getCitizens().size(); i++) {
-				//					for (int j = 0; j < m.getParties().size(); j++) {
-				//						if (m.getCitizens().get(i).getLastVote() != null) {
-				//							if (m.getCitizens().get(i).getLastVote().equals(m.getParties().get(j).getName()))
-				//								m.getParties().get(j).addVote();
-				//						}
-				//					}
-				//				}
-				//				m.getElections().get((m.getElections().size() - 1)).saveResults();
-				//				break;
+			// case 8:
+			// System.out.println("You chose to set a new election\nPlease enter month and
+			// year of the election");
+			// Election e = new Election(scan.nextInt(), scan.nextInt(), m.getCitizens(),
+			// m.getParties(),
+			// m.getBoxes());
+			// do {
+			// exist = false;
+			// for (int i = 0; i < m.getElections().size(); i++) {
+			// if (m.getElections().get(i).equals(e))
+			// exist = true;
+			// }
+			// if (exist) {
+			// System.out.println("Election already exist in thath date\nPlease enter
+			// details again");
+			// e = new Election(scan.nextInt(), scan.nextInt(), m.getCitizens(),
+			// m.getParties(), m.getBoxes());
+			// }
+			// } while (exist);
+			// m.addElection(e);
+			// System.out.println("Please enter for every citizen his vote - true/false");
+			// String vote;
+			// for (int i = 0; i < m.getCitizens().size(); i++) {
+			// System.out.println("is " + m.getCitizens().get(i).toString() + " want to
+			// vote?");
+			// m.getCitizens().get(i).setIsVoting(scan.nextBoolean());
+			// if (m.getCitizens().get(i).getIsVoting()) {
+			// System.out.println("Which party is the citizen voting for? enter a party
+			// name");
+			// for (int j = 0; j < m.getParties().size(); j++)
+			// System.out.print(m.getParties().get(j).toString());
+			// vote = scan.next();
+			// m.getCitizens().get(i).setLastVote(vote);
+			// }
+			// }
+			// for (int i = 0; i < m.getCitizens().size(); i++) {
+			// for (int j = 0; j < m.getParties().size(); j++) {
+			// if (m.getCitizens().get(i).getLastVote() != null) {
+			// if
+			// (m.getCitizens().get(i).getLastVote().equals(m.getParties().get(j).getName()))
+			// m.getParties().get(j).addVote();
+			// }
+			// }
+			// }
+			// m.getElections().get((m.getElections().size() - 1)).saveResults();
+			// break;
 			case 9:
 				System.out.println(
 						"You chose to see the election result\nPlease enter month and year of the requested election");
@@ -179,7 +186,7 @@ public class Program {
 			System.out.println("9 - Showing The last Election results");
 			System.out.println("10 - Exit");
 			try {
-				choice = Integer.parseInt(s.next());			
+				choice = Integer.parseInt(s.next());
 			} catch (InputMismatchException ime) {
 				System.out.println("Exception has been thrown - please enter right arguments");
 				isOK = true;
@@ -201,27 +208,32 @@ public class Program {
 		int ballotBox = 0;
 		do {
 			System.out.println("You chose to add a new ballot box\nWhich Ballot box would you like to add?");
-			System.out.println("1 - sick citizens ballot box\n2 - soldiers ballot box\n3 - sick soldiers ballot box\n4 - regular ballot box");
+			System.out.println(
+					"1 - sick citizens ballot box\n2 - soldiers ballot box\n3 - sick soldiers ballot box\n4 - regular ballot box");
 			ballotBox = s.nextInt();
 			switch (ballotBox) {
 			case 1:
 				System.out.println("What is the city that the ballot box will be in?");
-				BallotBox<SickCitizen> sickCitizensBox = new BallotBox<SickCitizen>(s.next(), m.getParties(), m.getParties().size(), "SickCitizen");
+				BallotBox<SickCitizen> sickCitizensBox = new BallotBox<SickCitizen>(s.next(), m.getParties(),
+						m.getParties().size(), "SickCitizen");
 				m.addBallotBox(sickCitizensBox);
 				break;
 			case 2:
 				System.out.println("What is the city that the ballot box will be in?");
-				BallotBox<Soldier> soldiersBox = new BallotBox<Soldier>(s.next(), m.getParties(), m.getParties().size(), "Soldier");
+				BallotBox<Soldier> soldiersBox = new BallotBox<Soldier>(s.next(), m.getParties(), m.getParties().size(),
+						"Soldier");
 				m.addBallotBox(soldiersBox);
 				break;
 			case 3:
 				System.out.println("What is the city that the ballot box will be in?");
-				BallotBox<SickSoldier> sickSoldiersBoxes = new BallotBox<SickSoldier>(s.next(), m.getParties(), m.getParties().size(), "SickSoldier");
+				BallotBox<SickSoldier> sickSoldiersBoxes = new BallotBox<SickSoldier>(s.next(), m.getParties(),
+						m.getParties().size(), "SickSoldier");
 				m.addBallotBox(sickSoldiersBoxes);
 				break;
 			case 4:
 				System.out.println("What is the city that the ballot box will be in?");
-				BallotBox<Citizen> citizensBox = new BallotBox<Citizen>(s.next(), m.getParties(), m.getParties().size(), "Citizen");
+				BallotBox<Citizen> citizensBox = new BallotBox<Citizen>(s.next(), m.getParties(), m.getParties().size(),
+						"Citizen");
 				m.addBallotBox(citizensBox);
 				break;
 			default:
@@ -254,7 +266,8 @@ public class Program {
 				System.out.println("Does he sick? (true/false)");
 				c.setIsSick(s.nextBoolean());
 				if (c.getIsSick() && c.age() <= Soldier.AGE_FOR_SOLDIER) {
-					System.out.println("please enter the following details\nis he carrying a weapon (true/false) and how many days does he sick");
+					System.out.println(
+							"please enter the following details\nis he carrying a weapon (true/false) and how many days does he sick");
 					c = new SickSoldier(c, s.nextBoolean());
 					((SickSoldier) c).setSickDays(s.nextInt());
 				} else if (c.getIsSick()) {
@@ -268,15 +281,18 @@ public class Program {
 				m.addCitizen(c);
 				c.setBallotBoxNum(m.addVoterToBox(c, c.getClass().getSimpleName()));
 			} catch (InputMismatchException ime) {
-				System.out.println("Exception has been thrown - please enter the right arguments, please enter all details again (name, id, year of born, if he is in quarantine)");
+				System.out.println(
+						"Exception has been thrown - please enter the right arguments, please enter all details again (name, id, year of born, if he is in quarantine)");
 				s.nextLine();
 				exist = true;
 			} catch (IllegalArgumentException iae) {
-				System.out.println("Exception has been thrown - please enter numbers in the citizen id, please enter all details again (name, id, year of born, if he is in quarantine)");
+				System.out.println(
+						"Exception has been thrown - please enter numbers in the citizen id, please enter all details again (name, id, year of born, if he is in quarantine)");
 				s.nextLine();
 				exist = true;
 			} catch (Exception e) {
-				System.out.println("Exception has been thrown - " + e.getMessage() + ", please enter all details again (name, id, year of born, if he is in quarantine)");
+				System.out.println("Exception has been thrown - " + e.getMessage()
+						+ ", please enter all details again (name, id, year of born, if he is in quarantine)");
 				s.nextLine();
 				exist = true;
 			}
