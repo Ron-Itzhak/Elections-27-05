@@ -20,7 +20,7 @@ public class Citizen {
 		else 
 			this.yearOfBorn = yearOfBorn;			
 	}
-
+		/// y???////
 	public Citizen(String name, int id, int yearOfBorn, boolean inQuarantine) {
 		this.name = name;
 		this.id = id;

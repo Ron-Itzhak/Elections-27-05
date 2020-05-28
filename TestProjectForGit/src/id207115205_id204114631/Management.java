@@ -2,7 +2,7 @@ package id207115205_id204114631;
 
 import java.util.ArrayList;
 
-public class Managment {
+public class Management {
 	private ArrayList<Election> elections;
 	private Set<Citizen> citizens;
 	private ArrayList<Party> parties;
@@ -12,7 +12,7 @@ public class Managment {
 	private BallotBox<Soldier> soldiersBallot;
 	private BallotBox<SickSoldier> sickSoldiersBallot;
 
-	public Managment() throws Exception {
+	public Management() throws Exception {
 //		ArrayList<Citizen> c = new ArrayList<Citizen>();
 //		citizens = new Set(c);
 		citizens = new Set<Citizen>();
