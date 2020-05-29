@@ -31,7 +31,7 @@ public class View extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("hello");
 		primaryStage.show();
-
+/// blablas
 
 		}
 	
