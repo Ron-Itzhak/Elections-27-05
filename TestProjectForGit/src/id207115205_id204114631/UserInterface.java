@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Methods {
+public interface UserInterface {
 	public static int getChoice(Scanner s) {
 		int choice = 0;
 		boolean isOK = false;

@@ -11,13 +11,6 @@ public class Contender extends Citizen {
 		this.partyBelonging = partyBelonging;
 		this.isContending = isContending;
 	}
-	
-//	public Contender(String name, int id, int yearOfBorn, boolean inQuarantine, int ballotBoxNum, String partyBelonging,
-//			boolean isContending) {
-//		super(name, id, yearOfBorn, inQuarantine, ballotBoxNum);
-//		this.partyBelonging = partyBelonging;
-//		this.isContending = isContending;
-//	}
 
 	public Contender(Citizen other, String partyBelonging) throws Exception {
 		this(other.name, other.id + "", other.yearOfBorn, other.inQuarantine, partyBelonging, true);
