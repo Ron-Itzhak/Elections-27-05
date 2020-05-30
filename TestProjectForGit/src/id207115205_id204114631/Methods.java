@@ -41,10 +41,10 @@ public class Methods {
 		return choice;
 	}
 
-	
+	////1////
 	public static void addBallotBox(Scanner s, Management m) {
 		int ballotBox = 0;
-		boolean exist;
+		//boolean exist;
 		do {
 			System.out.println("You chose to add a new ballot box\nWhich Ballot box would you like to add?");
 			System.out.println(
@@ -83,7 +83,7 @@ public class Methods {
 		int lastBoxNum = m.getBoxes().size() - 1;
 		System.out.println("Ballot Box number " + m.getBoxes().get(lastBoxNum).getId() + " added succesfully ");
 	}
-
+		//2//
 	public static void addCitizen(Scanner s, Management m) throws Exception {
 		boolean exist;
 		System.out.println("You chose to add a new citizen");
@@ -138,7 +138,7 @@ public class Methods {
 		} while (exist);
 		System.out.println("Citizen added successfully");
 	}
-	
+	////3////
 	public static void addParty(Scanner s, Management m) {
 		boolean exist;
 		System.out.println("You chose to add a new party\nPlease enter the name, flow and date of creation");
@@ -158,7 +158,7 @@ public class Methods {
 		m.addParty(p);
 		System.out.println("Party added succesfully");
 	}
-	
+	/////4///////
 	public static void addContender(Scanner scan, Management m) throws Exception {
 		boolean exist;
 		System.out.println("You chose to add a new contender to a party\nIs it already an existing citizen? Y/N");
@@ -214,20 +214,15 @@ public class Methods {
 
 		
 	}
-	
-	public static void showParties(Management m) {
-		System.out.print("You chose to see all the parties-");
-		for (int i = 0; i < m.getParties().size(); i++)
-			System.out.println(m.getParties().get(i).toString());
-	}
-	
+//////5////////
 	public static void showBallotResults(Management m) {
 		System.out.println("You chose to see the ballot boxes results-");
 		for (int i = 0; i < m.getBoxes().size(); i++)
 			System.out.print(m.getBoxes().get(i).toString());
 		
 	}
-	
+
+		
 	////6/////
 	public static void showCitizens(Management m) {
 		System.out.println("You chose to see all the citizens-");
@@ -235,6 +230,13 @@ public class Methods {
 			System.out.print(m.getCitizens().get(i).toString());
 
 	}
+	/////////7//////
+	public static void showParties(Management m) {
+		System.out.print("You chose to see all the parties-");
+		for (int i = 0; i < m.getParties().size(); i++)
+			System.out.println(m.getParties().get(i).toString());
+	}
+
 	///////////////8////////////////////
 	public static void CreateNewElection(Scanner scan,Management m) {
 		 System.out.println("You chose to set a new election\nPlease enter month and year of the election");
