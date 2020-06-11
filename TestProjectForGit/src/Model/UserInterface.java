@@ -1,4 +1,4 @@
-package id207115205_id204114631;
+package Model;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

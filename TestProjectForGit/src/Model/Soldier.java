@@ -1,4 +1,4 @@
-package id207115205_id204114631;
+package Model;
 
 public class Soldier extends Citizen {
 	public static final int AGE_FOR_SOLDIER = 21;
