@@ -86,7 +86,7 @@ public class View  {
 		BallotBoxType.getItems().addAll("sick citizens ballot box","soldiers ballot box","sick soldiers ballot box","regular ballot box");
 		 Label address = new Label("Enter city:");
 		 TextField adresstext = new TextField();
-		 Button Addressshow =  new Button("City Name ");
+		 Button Addressshow =  new Button("Submit ");
 		 HBox adressBox = new HBox(address,adresstext,Addressshow);
 		// VBox AddBallotVbox = new VBox(adressBox);
 		// Label address = new Label();
@@ -94,8 +94,6 @@ public class View  {
 		 VBox VBoxAddBallot = new VBox(SelectedBallot,BallotBoxType);
 		 
 			Button1.setOnAction(e -> bpRoot.setCenter(VBoxAddBallot));
-			
-			
 			BallotBoxType.setOnAction(e -> SelectedBallot.setText("The selected Ballot is " + BallotBoxType.getValue())
 			);
 			Addressshow.setOnAction(e -> JOptionPane.showMessageDialog(null, " The Ballot Box Of "+adresstext.getText()+" Added Successfully  "  ) );
