@@ -20,6 +20,7 @@ public class Controller {
 	
 	public void addBallotBox(){
 		theModel.addBallotBox(ma);
+		theView.uiaddBallotBox();
 	}
 
 	

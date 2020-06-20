@@ -2,17 +2,37 @@ package View;
 
 import javax.swing.JOptionPane;
 
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class View extends AbstractView {
+public class View  {
+	protected Label TopLable;
+	protected TextField Textt;
+	protected  BorderPane bpRoot;
+	protected Image ima = new Image("file:Files/Toplabel.jpg");
+	protected ImageView imgv = new ImageView(ima);
+	protected VBox vbRoot;
+
+	
+	
+	
+	
 	private Button Button1;
 	private Button Button2;
 	private Button Button3;
@@ -26,20 +46,66 @@ public class View extends AbstractView {
 	private Label lblEnterName;
 	Text text0;
 
+	
+	
+
 	public View(Stage primaryStage) {
-		super(primaryStage);
-		
-		
-		
-		
+		//////////////////////
+		primaryStage.setTitle("Elections");
+		BorderPane bpRoot =  new BorderPane();
+		bpRoot.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY,Insets.EMPTY)));
+		TopLable = new Label() ;
+		TopLable.setGraphic(imgv);
+		//Button1 = new Button("hello");
+		bpRoot.setTop(TopLable);
+		//primaryStage.setResizable(false);
+		vbRoot =  new VBox();
+		vbRoot.setSpacing(10);
+		vbRoot.setPadding(new Insets(10));
+		vbRoot.setSpacing(10);
+		bpRoot.setLeft(vbRoot);
+
+		Scene scene = new Scene(bpRoot, 1000, 800);
+		primaryStage.setScene(scene);
+		primaryStage.show();		
+		/////////////////////////////////////////////		
 		 Image ballot = new Image("file:Files/ballot.jpg");
 		 ImageView imgv1 = new ImageView(ballot);
-		 
 		 ImageView imgv2 = new ImageView("file:Files/a.jpg");
-
+		 
+		 
+		 
+		 /////// 1 Add Ballot /////////////////////////
+		 
 		Button1 = new Button("Adding Ballot Box");
 		HBox hbRoot1 = new HBox(imgv1,Button1);
-		Button1.setOnAction(e -> JOptionPane.showMessageDialog(null, " Bibi Is the King !"));
+		
+		
+		Label SelectedBallot = new Label ("You chose to add a new ballot box Which Ballot box would you like to add?");
+		ComboBox<String> BallotBoxType = new ComboBox<String>();
+		BallotBoxType.getItems().addAll("sick citizens ballot box","soldiers ballot box","sick soldiers ballot box","regular ballot box");
+		 Label address = new Label("Enter city:");
+		 TextField adresstext = new TextField();
+		 Button Addressshow =  new Button("City Name ");
+		 HBox adressBox = new HBox(address,adresstext,Addressshow);
+		// VBox AddBallotVbox = new VBox(adressBox);
+		// Label address = new Label();
+		// Label address = new Label();
+		 VBox VBoxAddBallot = new VBox(SelectedBallot,BallotBoxType);
+		 
+			Button1.setOnAction(e -> bpRoot.setCenter(VBoxAddBallot));
+			
+			
+			BallotBoxType.setOnAction(e -> SelectedBallot.setText("The selected Ballot is " + BallotBoxType.getValue())
+			);
+			Addressshow.setOnAction(e -> JOptionPane.showMessageDialog(null, " The Ballot Box Of "+adresstext.getText()+" Added Successfully  "  ) );
+			VBoxAddBallot.getChildren().add(adressBox);
+			System.out.println(adresstext.getText());
+						//setOnAction(e -> JOptionPane.showMessageDialog(null, " Bibi Is the King !"));
+		
+		
+						
+				//JOptionPane.showMessageDialog(null, " Bibi Is the King !")
 		Button2 = new Button("Adding Citizen");
 		Button2.setOnAction(e -> JOptionPane.showMessageDialog(null, " Bibi Is the King !"));
 		HBox hbRoot2 = new HBox(imgv2,Button2);
