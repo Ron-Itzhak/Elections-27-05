@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+
 import Model.Model;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,18 +31,18 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import listeners.ViewListenable;
 
-public class View implements ViewListenable {
-	
+public class View {
+
 	private ArrayList<ViewListenable> listeners = new ArrayList<ViewListenable>();
-	
-	protected Label TopLable;
+
+	protected Label TopLable,Citizen;
 	protected TextField Textt;
 	protected BorderPane bpRoot;
 	protected Image ima = new Image("file:Files/Toplabel.jpg");
 	protected ImageView imgv = new ImageView(ima);
-	protected VBox vbRoot;
+	protected VBox vbRoot,VBoxAddBallot,VboxAddCitizen;
 
-	private Button Button1,Button2,Button3,Button4,Button5,Button6,Button7,Button8,Button9,Button10;
+	private AbButton Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9, Button10;
 	private Label lblEnterName;
 	private Text text0;
 	private String type;
@@ -47,15 +50,14 @@ public class View implements ViewListenable {
 
 	private TextField adresstext;
 	private ComboBox<String> BallotBoxType;
-	
-	public View(Stage primaryStage) {		
+
+	public View(Stage primaryStage) {
 		primaryStage.setTitle("Elections");
 		BorderPane bpRoot = new BorderPane();
 		bpRoot.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		TopLable = new Label();
 		TopLable.setGraphic(imgv);
-		
-		
+
 		bpRoot.setTop(TopLable);
 		// primaryStage.setResizable(false);
 		vbRoot = new VBox();
@@ -63,32 +65,48 @@ public class View implements ViewListenable {
 		vbRoot.setSpacing(10);
 		bpRoot.setLeft(vbRoot);
 
-		Scene scene = new Scene(bpRoot, 1000, 800);
+		Scene scene = new Scene(bpRoot, 500, 555);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		/////////////////////////////////////////////
+
+		//////////////////Images///////////////////////////
 		Image ballot = new Image("file:Files/ballot.jpg");
 		ImageView imgv1 = new ImageView(ballot);
-		ImageView imgv2 = new ImageView("file:Files/a.jpg");
+		ImageView imgv2 = new ImageView("file:Files/person.jpg");
+		ImageView imgv3 = new ImageView("file:Files/Party.jpg");
 
+		ImageView imgv4 = new ImageView("file:Files/person.jpg");
+		ImageView imgv6 = new ImageView("file:Files/person.jpg");
+		ImageView imgv7 = new ImageView("file:Files/Party.jpg");
+		ImageView imgv8 = new ImageView("file:Files/Vote.jpg");
+
+		ImageView imgv5 = new ImageView("file:Files/ElectionResult.jpg");
+		ImageView imgv9 = new ImageView("file:Files/ElectionResult.jpg");
+
+
+
+	
 		/////// 1 Add Ballot /////////////////////////
-		Button1 = new Button("Adding Ballot Box");
-		HBox hbRoot1 = new HBox(imgv1, Button1);
+		Button1 = new AbButton("Adding Ballot Box",imgv1);
+        Button1.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 
-		Label SelectedBallot = new Label("You chose to add a new ballot box Which Ballot box would you like to add?");
+		Button1.setMaxWidth(250.0);
+		Button1.setBackground(new Background (new BackgroundFill(Color.WHITE, null, null )));
+
+
+		Label SelectedBallot = new Label("You chose to add a new ballot Box"); 
+		Label SelectedBallot2 = new Label("Which Ballot box would you like to add?");
 		BallotBoxType = new ComboBox<String>();
 		BallotBoxType.getItems().addAll("SickCitizen", "Soldier", "SickSoldier", "Citizen");
 		Label address = new Label("Enter city:");
 		adresstext = new TextField();
-		Button Addressshow = new Button("Submit ");
-		HBox adressBox = new HBox(address, adresstext, Addressshow);
+		AbButton SubmitButton = new AbButton("Submit");
+		HBox adressBox = new HBox(address, adresstext, SubmitButton);
 		// VBox AddBallotVbox = new VBox(adressBox);
 		// Label address = new Label();
-		VBox VBoxAddBallot = new VBox(SelectedBallot, BallotBoxType);
-		Button1.setMaxWidth(250.0);
+		VBoxAddBallot = new VBox(SelectedBallot,SelectedBallot2,BallotBoxType);
 		Button1.setOnAction(e -> bpRoot.setCenter(VBoxAddBallot));
-		
+
 //		BallotBoxType.setOnAction(new EventHandler<ActionEvent>() {
 //			@Override
 //			public void handle(ActionEvent action) { 
@@ -96,46 +114,99 @@ public class View implements ViewListenable {
 //			l.addBallotBox(BallotBoxType.getValue().toString(),adresstext.getText());
 //				}
 //		});
-		
-		
-	Addressshow.setOnAction(new EventHandler<ActionEvent>() {
-		@Override
-		public void handle(ActionEvent action) {JOptionPane.showMessageDialog(null,
-				" The Ballot Box Of " + adresstext.getText() + " Added Successfully  ");
-			
-			
-	for (ViewListenable l : listeners)
-		l.addBallotBox(BallotBoxType.getValue().toString(),adresstext.getText());}
-	});
-	VBoxAddBallot.getChildren().add(adressBox);
-		
-//		.setOnAction(e -> JOptionPane.showMessageDialog(null,
-//				" The Ballot Box Of " + adresstext.getText() + " Added Successfully  "));
-//		VBoxAddBallot.getChildren().add(adressBox);
-	
-		
+
+		SubmitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent action) {
+				JOptionPane.showMessageDialog(null,
+						" The Ballot Box Of " + adresstext.getText() + " Added Successfully  ");
+
+				for (ViewListenable l : listeners)
+					l.addBallotBox(BallotBoxType.getValue().toString(), adresstext.getText());
+			}
+		});
+		VBoxAddBallot.getChildren().add(adressBox);
+
+		//	.setOnAction(e -> JOptionPane.showMessageDialog(null,
+		//	" The Ballot Box Of " + adresstext.getText() + " Added Successfully  "));
 		// setOnAction(e -> JOptionPane.showMessageDialog(null, " Bibi Is the King !"));
 
 		// JOptionPane.showMessageDialog(null, " Bibi Is the King !")
-		Button2 = new Button("Adding Citizen");
-		Button2.setOnAction(e -> JOptionPane.showMessageDialog(null, " Bibi Is the King !"));
-		HBox hbRoot2 = new HBox(imgv2, Button2);
+		
+		
+		
+		///// try of picture in button
+		//Image image = new Image(getClass().getResourceAsStream("play3.jpg"));
 
-		Button3 = new Button("Adding Party");
-		Button4 = new Button("Adding Contender to Party");
-		Button5 = new Button("Showing Ballot Boxes results");
-		Button6 = new Button("Showing all the Citizens");
-		Button7 = new Button("Showing all the Parties");
-		Button8 = new Button("Setting New Election");
-		Button9 = new Button("Showing The last Election results");
-		Button10 = new Button("exit");
-		Button10.setMaxWidth(250.0);
-		Button9.setMaxWidth(250.0);
-		Button8.setMaxWidth(250.0);
-		Button7.setMaxWidth(250.0);
-		Button6.setMaxWidth(250.0);
+//		Button3.setOnAction(new EventHandler<ActionEvent>() {
+//		    @Override public void handle(ActionEvent e) {
+//		        Button button = (Button) e.getSource();
+//		        button.setGraphic(imgv1);
+//		    }
+//		});
 
-		vbRoot.getChildren().addAll(hbRoot1, hbRoot2, Button3, Button4, Button5, Button6, Button7, Button8, Button9,
+		
+		//////2  add citizen //////////
+		Button2 = new AbButton("Adding Citizen",imgv2);
+		Citizen= new Label("You chose to add a new citizen");
+		Label name = new Label("Enter Name:");
+		TextField nametext = new TextField();
+		nametext.setMaxWidth(250.0);
+		Label idlbl = new Label("Enter Id:");
+		TextField idtext = new TextField();
+		idtext.setMaxWidth(250.0);
+		Label yearlbl = new Label("Enter year of born:");
+		TextField yeartext = new TextField();
+		yeartext.setMaxWidth(250.0);
+		Label quarntinelbl = new Label("Enter quarntine true or false:");
+		TextField quarntinetext = new TextField();
+		quarntinetext.setMaxWidth(250.0);
+
+
+		AbButton SubmitButton2 = new AbButton("Submit");
+
+		VboxAddCitizen = new VBox(Citizen,name,nametext,idlbl,idtext,yearlbl,yeartext,quarntinelbl,quarntinetext,SubmitButton2);
+		Button2.setOnAction(e -> bpRoot.setCenter(VboxAddCitizen));
+		//VboxAddCitizen.setAlignment(Pos.CENTER_LEFT);
+		
+		SubmitButton2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent action) {
+				JOptionPane.showMessageDialog(null,
+						" The Citizen  " + nametext.getText() + " Added Successfully  ");
+
+				for (ViewListenable l : listeners)
+					l.addCitizen(nametext.getText(), Integer.parseInt(idtext.getText()),Integer.parseInt(yeartext.getText()),Boolean.parseBoolean(quarntinetext.getText()));
+			}
+		});
+
+		/////
+
+		///////3//////
+		Button3 = new AbButton("Adding Party",imgv3);
+
+		//////////////
+		
+		Button4 = new AbButton("Adding Contender to Party",imgv4);
+
+		Button5 = new AbButton("Showing Ballot Boxes results",imgv5);
+
+		Button6 = new AbButton("Showing all the Citizens",imgv6);
+
+
+        AbButton Button7 = new AbButton("Showing all the Parties",imgv7);
+		Button8 = new AbButton("Setting New Election",imgv8);
+		Button9 = new AbButton("Showing The last Election results",imgv9);
+
+        
+        
+        
+        //// 10///
+		Button10 = new AbButton("exit");
+		Button10.setOnAction(e -> Platform.exit());
+		/////////
+	
+		vbRoot.getChildren().addAll(Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9,
 				Button10);
 
 		text0 = new Text("Welcome To Aviad And Ron Project ");
@@ -144,30 +215,8 @@ public class View implements ViewListenable {
 		lblEnterName = new Label("Enter Name: ");
 
 	}
-	
-	
+
 	public void registerListener(ViewListenable newListener) {
 		listeners.add(newListener);
 	}
-
-
-	public String getAdressfromui() {
-		return adresstext.getText();
-
-	}
-
-	public String getType() {
-		return type;
-
-	}
-
-
-	@Override
-	public void addBallotBox(String string, String a) {
-		// TODO Auto-generated method stub
-		
-	}
-
-///from Listener
-
 }

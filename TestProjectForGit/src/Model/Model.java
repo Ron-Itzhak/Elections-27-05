@@ -22,4 +22,9 @@ public class Model {
 		listeners.add(listener);
 	}
 
+	public void addCitizen(String name, int id, int year, boolean qurantine) {
+		//c = new Citizen
+		//m.addCitizen(c);
+	}
+
 }

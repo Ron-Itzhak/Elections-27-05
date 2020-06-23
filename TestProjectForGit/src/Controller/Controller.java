@@ -36,4 +36,11 @@ public class Controller implements ViewListenable,ElectionsListenable {
 	public void addBallotBox(String adress,String type) {
 		theModel.addBallotBox(adress, type);
 		
+	}
+
+
+
+	@Override
+	public void addCitizen(String name, int id, int year, boolean qurantine) {
+		theModel.addCitizen(name, id, year, qurantine);		
 	}}

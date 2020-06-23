@@ -73,7 +73,7 @@ public class Management {
 	}
 
 	//// MVC FUNCS //////
-
+////1//////
 	public void addBallotBoxMVC(String adress, String type) {
 		if (type.equals(Soldier.class.getSimpleName())) {
 			soldiersBallot = new BallotBox<Soldier>(adress, parties, parties.size(), type);
@@ -93,6 +93,9 @@ public class Management {
 
 	///////////////
 
+	/////2////////
+
+	////////
 	public ArrayList<Citizen> getNewContenderList() {
 		ArrayList<Citizen> list = new ArrayList<Citizen>();
 		return list;
