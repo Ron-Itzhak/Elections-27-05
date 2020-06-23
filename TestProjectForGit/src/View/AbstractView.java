@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+//not in use 
 public abstract class AbstractView {
 protected Label TopLable;
 protected TextField Textt;

@@ -60,6 +60,7 @@ public class Management {
 		boxes.add(soldiersBallot);
 		boxes.add(sickSoldiersBallot);
 		for (int i = 0; i < citizens.size(); i++) {
+
 			if (citizens.get(i).getClass() == Soldier.class)
 				soldiersBallot.addVoter(citizens.get(i));
 			else if (citizens.get(i).getClass() == SickCitizen.class)
@@ -70,6 +71,27 @@ public class Management {
 				citizensBallot.addVoter(citizens.get(i));
 		}
 	}
+
+	//// MVC FUNCS //////
+
+	public void addBallotBoxMVC(String adress, String type) {
+		if (type.equals(Soldier.class.getSimpleName())) {
+			soldiersBallot = new BallotBox<Soldier>(adress, parties, parties.size(), type);
+			addBallotBox(soldiersBallot);
+		} else if (type.equals(SickCitizen.class.getSimpleName())) {
+			sickCitizensBallot = new BallotBox<SickCitizen>(adress, parties, parties.size(), type);
+			addBallotBox(sickCitizensBallot);
+		} else if (type.equals(SickSoldier.class.getSimpleName())) {
+			sickSoldiersBallot = new BallotBox<SickSoldier>(adress, parties, parties.size(), type);
+			addBallotBox(sickSoldiersBallot);
+		} else {
+			citizensBallot = new BallotBox<Citizen>(adress, parties, parties.size(), type);
+			addBallotBox(citizensBallot);
+
+		}
+	}
+
+	///////////////
 
 	public ArrayList<Citizen> getNewContenderList() {
 		ArrayList<Citizen> list = new ArrayList<Citizen>();
@@ -85,12 +107,12 @@ public class Management {
 	}
 
 	public void addCitizen(Citizen c) {
-		citizens.addData(c);	
-		if (c.getClass() == Soldier.class) 
+		citizens.addData(c);
+		if (c.getClass() == Soldier.class)
 			boxes.get(2).getVoters().add(c);
-		else if (c.getClass() == SickSoldier.class) 
+		else if (c.getClass() == SickSoldier.class)
 			boxes.get(3).getVoters().add(c);
-		else if (c.getClass() == SickCitizen.class) 
+		else if (c.getClass() == SickCitizen.class)
 			boxes.get(1).getVoters().add(c);
 		else
 			boxes.get(0).getVoters().add(c);
@@ -115,7 +137,7 @@ public class Management {
 	public void addBallotBox(BallotBox b) {
 		boxes.add(b);
 	}
-	
+
 	public BallotBox getBoxById(int id) {
 		for (int i = 0; i < boxes.size(); i++) {
 			if (boxes.get(i).getId() == id)
@@ -123,7 +145,7 @@ public class Management {
 		}
 		return null;
 	}
-	
+
 	public int addVoterToBox(Citizen c, String type) {
 		for (int i = 0; i < boxes.size(); i++) {
 			if (boxes.get(i).getType().equals(type)) {
