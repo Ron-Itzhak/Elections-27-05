@@ -184,9 +184,7 @@ public class View {
 
 		///////3//////
 		Button3 = new AbButton("Adding Party",imgv3);
-
-		//////////////
-		
+		//		
 		Button4 = new AbButton("Adding Contender to Party",imgv4);
 
 		Button5 = new AbButton("Showing Ballot Boxes results",imgv5);
