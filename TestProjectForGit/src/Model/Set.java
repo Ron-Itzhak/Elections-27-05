@@ -30,4 +30,16 @@ public class Set <T extends Citizen> {
 		return allData.size();
 	}
 	
+	public int indexOf(T t) {
+		return allData.indexOf(t);
+	}
+	
+	public void remove(int index) {
+		allData.remove(index);
+	}
+	
+	public void addData(int index, T t) {
+		allData.add(index, t);
+	}
+	
 }

@@ -43,8 +43,8 @@ public class Controller implements ViewListenable,ElectionsListenable {
 
 
 	@Override
-	public void addCitizen(String name, int id, int year, boolean qurantine) {
-		theModel.addCitizen(name, id, year, qurantine);		
+	public void addCitizen(String name, int id, int year, boolean qurantine, String type) {
+		theModel.addCitizen(name, id, year, qurantine, type);		
 	}
 
 
@@ -58,9 +58,20 @@ public class Controller implements ViewListenable,ElectionsListenable {
 
 
 	@Override
-	public void addContender() {
-		// TODO Auto-generated method stub
-
+	public void addExistingContenderToParty(int id, String partyBelonging, boolean isExist) throws Exception {
+		theModel.addExistingContenderToParty(id, partyBelonging, isExist);
+		
 	}
+
+
+
+	@Override
+	public void addContenderToParty(String name, int id, int year, boolean qurantine, String partyBelonging) throws Exception {
+			boolean exist = true;
+			theModel.addCitizen(name, id, year, qurantine); 
+			addExistingContenderToParty(id, partyBelonging, true);
+		
+	}
+
 
 }

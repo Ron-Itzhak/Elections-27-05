@@ -23,13 +23,16 @@ public class Model {
 		listeners.add(listener);
 	}
 
-	public void addCitizen(String name, int id, int year, boolean qurantine) {
-		//c = new Citizen
-		//m.addCitizen(c);
+	public void addCitizen(String name, int id, int year, boolean qurantine, String type) {
+		m.addCitizen(name, id, year, qurantine, type);
 	}
 	
 	public void addParty(String name, eFlow flow, Date dateOfCreation) {
 		m.addParty(name, flow, dateOfCreation);
+	}
+	
+	public void addExistingContenderToParty(int id, String partyBelonging, boolean isExist) throws Exception {
+		m.addContender(id, partyBelonging, isExist);
 	}
 
 }
