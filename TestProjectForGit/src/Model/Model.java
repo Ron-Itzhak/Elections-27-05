@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 import Controller.Controller;
+import Model.Party.eFlow;
 import listeners.ElectionsListenable;
 
 public class Model {
@@ -25,6 +26,10 @@ public class Model {
 	public void addCitizen(String name, int id, int year, boolean qurantine) {
 		//c = new Citizen
 		//m.addCitizen(c);
+	}
+	
+	public void addParty(String name, eFlow flow, Date dateOfCreation) {
+		m.addParty(name, flow, dateOfCreation);
 	}
 
 }

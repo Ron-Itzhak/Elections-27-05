@@ -2,6 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 
+import Model.Party.eFlow;
+
 public class Management {
 	private ArrayList<Election> elections;
 	private Set<Citizen> citizens;
@@ -139,6 +141,12 @@ public class Management {
 
 	public void addBallotBox(BallotBox b) {
 		boxes.add(b);
+	}
+	
+	public void addParty(String name, eFlow flow, Date dateOfCreation) {
+		ArrayList<Contender> contenders = new ArrayList<Contender>();
+		Party p = new Party(name, flow.name(), dateOfCreation + "", contenders);
+		parties.add(p);
 	}
 
 	public BallotBox getBoxById(int id) {
