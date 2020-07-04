@@ -2,6 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 
+import Model.Party.eFlow;
+
 public class Management {
 	private ArrayList<Election> elections;
 	private Set<Citizen> citizens;
@@ -13,8 +15,8 @@ public class Management {
 	private BallotBox<SickSoldier> sickSoldiersBallot;
 
 	public Management() throws Exception {
-//		ArrayList<Citizen> c = new ArrayList<Citizen>();
-//		citizens = new Set(c);
+		//		ArrayList<Citizen> c = new ArrayList<Citizen>();
+		//		citizens = new Set(c);
 		citizens = new Set<Citizen>();
 		parties = new ArrayList<Party>();
 		boxes = new ArrayList<BallotBox>();
@@ -73,7 +75,7 @@ public class Management {
 	}
 
 	//// MVC FUNCS //////
-////1//////
+	////1//////
 	public void addBallotBoxMVC(String adress, String type) {
 		if (type.equals(Soldier.class.getSimpleName())) {
 			soldiersBallot = new BallotBox<Soldier>(adress, parties, parties.size(), type);
@@ -140,6 +142,38 @@ public class Management {
 	public void addBallotBox(BallotBox b) {
 		boxes.add(b);
 	}
+	
+	public void addCitizen(String name, int id, boolean yearOfBorn, boolean inQuarantine, String type) {
+		
+	}
+
+	public void addContender(int id, String partyBelonging, boolean isExist) throws Exception {
+		if (isExist) {
+			for (int i = 0; i < citizens.size(); i++) {
+				if (citizens.get(i).getId() == id) {
+					isExist = true;
+					Citizen c = citizens.get(i);
+					int location = citizens.indexOf(citizens.get(i));
+					citizens.remove(location);
+					Contender con  = new Contender(c, partyBelonging);
+					citizens.addData(location ,con); 
+					for (int j = 0; j < parties.size(); j++) {
+						if (parties.get(i).getName().equals(partyBelonging))
+							parties.get(i).addingContender(con);
+					}
+				}
+			}
+		}
+		else {
+			
+		}
+	}
+
+	public void addParty(String name, eFlow flow, Date dateOfCreation) {
+		ArrayList<Contender> contenders = new ArrayList<Contender>();
+		Party p = new Party(name, flow.name(), dateOfCreation + "", contenders);
+		parties.add(p);
+	}
 
 	public BallotBox getBoxById(int id) {
 		for (int i = 0; i < boxes.size(); i++) {
@@ -159,13 +193,15 @@ public class Management {
 		return -1;
 	}
 
-//	public void addCitizenToBallotBox(Citizen c, int boxId) {
-//		boxes.get(boxId).getVoters().add(c);
-//	}
+	//	public void addCitizenToBallotBox(Citizen c, int boxId) {
+	//		boxes.get(boxId).getVoters().add(c);
+	//	}
 
 	public void election() {
 		for (int i = 0; i < boxes.size(); i++)
 			boxes.get(i).vote();
 	}
+
+
 
 }
