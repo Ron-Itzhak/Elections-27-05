@@ -11,6 +11,7 @@ public class Program{
 			choice = UserInterface.getChoice(scan);
 			switch (choice) {
 			case 1:
+				UserInterface.addBallotBox(scan, m);
 				break;
 			case 2:
 				UserInterface.addCitizen(scan, m);
