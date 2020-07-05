@@ -5,17 +5,19 @@ import java.util.ArrayList;
 import Controller.Controller;
 import Model.Party.eFlow;
 import listeners.ElectionsListenable;
+import listeners.ViewListenable;
 
 public class Model {
 	private Management m;
-	private ArrayList<ElectionsListenable> listeners = new ArrayList<ElectionsListenable>();
+	private ArrayList<ViewListenable> listeners; 
 
 	public Model() throws Exception {
 		m = new Management();	
+		listeners= new ArrayList<ViewListenable>();
 	}
 
 
-	public void registerListener(ElectionsListenable listener) {
+	public void registerListener(ViewListenable listener) {
 		listeners.add(listener);
 	}
 
@@ -41,7 +43,7 @@ public class Model {
 		m.addCitizen(name, id, year, qurantine, numOfSick, carryWeapon, type);
 	}
 
-	public void addParty(String name, eFlow flow, Date dateOfCreation) {
+	public void addParty(String name, String flow, Date dateOfCreation) {
 		m.addParty(name, flow, dateOfCreation);
 	}
 
@@ -52,6 +54,19 @@ public class Model {
 	//5////
 	public String showBallotResults() {
 		return m.showBallotResults();
+		
+
 	}
 	////
+
+
+	public String viewAllCitizens() {
+		return m.viewAllCitizens();	
+	}
+
+
+	public String showParties() {
+		return	m.showParties();
+ 	}
+	
 }

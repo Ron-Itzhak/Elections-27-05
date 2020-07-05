@@ -18,6 +18,7 @@ public class Program extends Application{
 		Model theModel = new Model();
 		View theView = new View(primaryStage);
 		Controller controller = new Controller(theModel, theView);
+
 		
 	}
 

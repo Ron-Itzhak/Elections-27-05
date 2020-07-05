@@ -1,10 +1,11 @@
 package View;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
-
+import Model.Date;
 import Model.Model;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -33,8 +34,8 @@ import listeners.ViewListenable;
 
 public class View {
 
-	private ArrayList<ViewListenable> listeners = new ArrayList<ViewListenable>();
-
+	private ArrayList<ViewListenable> listeners;
+	public static Date Today;
 	protected Label TopLable,Citizen;
 	protected TextField Textt;
 	protected BorderPane bpRoot;
@@ -52,20 +53,22 @@ public class View {
 	private ComboBox<String> BallotBoxType;
 
 	public View(Stage primaryStage) {
+		//Date todays = (Date) Calendar.getInstance().getTime();
+
+		Today= new Date(-1780, 6, 5);
+		listeners = new ArrayList<ViewListenable>();
 		primaryStage.setTitle("Elections");
 		BorderPane bpRoot = new BorderPane();
 		bpRoot.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		TopLable = new Label();
 		TopLable.setGraphic(imgv);
-
 		bpRoot.setTop(TopLable);
-		// primaryStage.setResizable(false);
 		vbRoot = new VBox();
 		vbRoot.setPadding(new Insets(10));
 		vbRoot.setSpacing(10);
 		bpRoot.setLeft(vbRoot);
 
-		Scene scene = new Scene(bpRoot, 500, 555);
+		Scene scene = new Scene(bpRoot, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
@@ -88,14 +91,11 @@ public class View {
 	
 		/////// 1 Add Ballot /////////////////////////
 		Button1 = new AbButton("Adding Ballot Box",imgv1);
-        //Button1.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 		Button1.setMaxWidth(250.0);
-		//Button1.setBackground(new Background (new BackgroundFill(Color.WHITE, null, null )));
 		Label SelectedBallot = new Label("You chose to add a new ballot Box"); 
 		Label SelectedBallot2 = new Label("Which Ballot box would you like to add?");
 		BallotBoxType = new ComboBox<String>();
 		BallotBoxType.setMaxWidth(250.0);
-
 		BallotBoxType.getItems().addAll("SickCitizen", "Soldier", "SickSoldier", "Citizen");
 		Label address = new Label("Enter city:");
 		adresstext = new TextField();
@@ -103,13 +103,9 @@ public class View {
 		HBox adressBox = new HBox(address, adresstext, SubmitButton);
 		// VBox AddBallotVbox = new VBox(adressBox);
 		// Label address = new Label();
-		VBoxAddBallot = new VBox(SelectedBallot,SelectedBallot2,BallotBoxType);
+		VBoxAddBallot = new VBox(SelectedBallot,SelectedBallot2,BallotBoxType,adressBox);
+		//VBoxAddBallot.getChildren().add(adressBox);
 		Button1.setOnAction(e -> bpRoot.setCenter(VBoxAddBallot));
-
-		
-		
-		
-		
 		SubmitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent action) {
@@ -121,28 +117,13 @@ public class View {
 				else {
 				JOptionPane.showMessageDialog(null,
 						" The Ballot Box Of " + adresstext.getText() + " Added Successfully  ");
-
-				for (ViewListenable l : listeners)
-					l.addBallotBox(BallotBoxType.getValue().toString(), adresstext.getText());
+				listeners.get(0).addBallotBox( adresstext.getText(),BallotBoxType.getValue().toString());
 			}}
 		});
-		VBoxAddBallot.getChildren().add(adressBox);
 
 		//	.setOnAction(e -> JOptionPane.showMessageDialog(null,
 		//	" The Ballot Box Of " + adresstext.getText() + " Added Successfully  "));
 		// setOnAction(e -> JOptionPane.showMessageDialog(null, "Text"));		
-		
-		
-		///// try of picture in button
-		//Image image = new Image(getClass().getResourceAsStream("play3.jpg"));
-
-//		Button3.setOnAction(new EventHandler<ActionEvent>() {
-//		    @Override public void handle(ActionEvent e) {
-//		        Button button = (Button) e.getSource();
-//		        button.setGraphic(imgv1);
-//		    }
-//		});
-
 		
 		//////2  add citizen //////////
 		Button2 = new AbButton("Adding Citizen",imgv2);
@@ -172,6 +153,8 @@ public class View {
 		Button2.setOnAction(e -> bpRoot.setCenter(VboxAddCitizen));
 		//VboxAddCitizen.setAlignment(Pos.CENTER_LEFT);
 		
+		//cmbQuarntineType.setOnAction(arg0);
+		
 		SubmitButton2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent action) {
@@ -184,8 +167,8 @@ public class View {
 				JOptionPane.showMessageDialog(null,
 						" The Citizen  " + nametext.getText() + " Added Successfully  ");
 
-				for (ViewListenable l : listeners)
-					l.addCitizen(nametext.getText(), Integer.parseInt(idtext.getText()),Integer.parseInt(yeartext.getText()),Boolean.parseBoolean(cmbQuarntineType.getValue()),cmbCitizenType.getValue());
+				//for (ViewListenable l : listeners)
+					//l.addCitizen(nametext.getText(), Integer.parseInt(idtext.getText()),Integer.parseInt(yeartext.getText()),Boolean.parseBoolean(cmbQuarntineType.getValue()),cmbCitizenType.getValue());
 			}}
 		});
 
@@ -218,11 +201,17 @@ public class View {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
-			//	for (ViewListenable l : listeners)
-				//	l.addParty(tfName.getText(), cmbFactionChoice.getValue());
+				if(tfName.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							" Please fill the blank textfields ");
+
+				}
+				else {
+
+				for (ViewListenable l : listeners)
+					l.addParty(tfName.getText(), cmbFactionChoice.getValue(),Today);
 				JOptionPane.showMessageDialog(null, "Party added successfuly!");
-			}
+			}}
 		});
 		
 		
@@ -256,8 +245,12 @@ public class View {
 			@Override
 			public void handle(ActionEvent event) {
 				if(cmbCitizenChoice.getValue().equals("true")) {
+					VboxAddContender.getChildren().addAll(lblID,tfID);
+				}
+				else {
 					 VboxAddContender.getChildren().addAll(lblName,tfConName,lblID,tfID,lblYear,tfYear,lblNameP,tfNameP,lblSickDays,tfSickDays,btSubmit4);
-					JOptionPane.showMessageDialog(null, "Party added successfuly!");
+
+					
 				}
 
 				
@@ -276,29 +269,82 @@ public class View {
 				JOptionPane.showMessageDialog(null, "Party added successfuly!");
 			}
 		});
-
 		
-		
-
-		
-		
-		
-
-		
-//////5//////
+		//////5//////
 		Button5 = new AbButton("Showing Ballot Boxes results",imgv5);
 
-		Text allBallots = new Text(listeners.get(0).viewAllBallots());
-		Button5.setOnAction(e -> bpRoot.setCenter(allBallots));
+		Text allBallots = new Text();
+		//String str = listeners.get(0).viewAllBallots();
+		//allBallots.setText(str);
+		//allBallots.setText(listeners.get(0).viewAllCitizens());
+
+		//Button5.setOnAction(e -> bpRoot.setCenter(allBallots));
+		Button5.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				for (ViewListenable l : listeners)
+					//JOptionPane.showMessageDialog(null,l.viewAllCitizens());
+					allBallots.setText(l.viewAllBallots());
+
+				bpRoot.setCenter(allBallots);
+				
+						}
+		});
 
 
-/////////////
+
+		/////////////6/////
 		Button6 = new AbButton("Showing all the Citizens",imgv6);
+		Text allCitizens = new Text();
 
+		//Text allCitizens = new Text(listeners.get(0).viewAllCitizens());
+		
+		Button6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				for (ViewListenable l : listeners)
+					//JOptionPane.showMessageDialog(null,l.viewAllCitizens());
+					allCitizens.setText(l.viewAllCitizens());
+				bpRoot.setCenter(allCitizens);
+				
+						}
+		});
+			//////////////
+
+		
+		/////////////7/////
 
         Button7 = new AbButton("Showing all the Parties",imgv7);
+		Text allParties = new Text();
+		Button7.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				for (ViewListenable l : listeners)
+					//JOptionPane.showMessageDialog(null,l.viewAllCitizens());
+					allParties.setText(l.viewAllParties());
+
+				bpRoot.setCenter(allParties);
+				
+						}
+		});
+
+
+			//////////////////
+
+        
+        
 		Button8 = new AbButton("Setting New Election",imgv8);
+
+		
+		/////////9/////
 		Button9 = new AbButton("Showing The last Election results",imgv9);
+		Text txtElection = new Text("a");
+//		txtElection.setText(listeners.get(0).viewResults());
+		
+		Button9.setOnAction(e -> bpRoot.setCenter(txtElection));
+
+		/////////////////
 
         
         
@@ -318,5 +364,7 @@ public class View {
 
 	public void registerListener(ViewListenable newListener) {
 		listeners.add(newListener);
+		System.out.println(listeners.size());
+
 	}
 }

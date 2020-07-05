@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Model.Party.eFlow;
 
@@ -13,8 +14,9 @@ public class Management {
 	private BallotBox<SickCitizen> sickCitizensBallot;
 	private BallotBox<Soldier> soldiersBallot;
 	private BallotBox<SickSoldier> sickSoldiersBallot;
-
 	public Management() throws Exception {
+		
+
 		//		ArrayList<Citizen> c = new ArrayList<Citizen>();
 		//		citizens = new Set(c);
 		citizens = new Set<Citizen>();
@@ -93,13 +95,9 @@ public class Management {
 		}
 	}
 
-	///////////////
-
-	/////2////////
-
-	////////
 	
 	
+
 	
 	/////5///
 	public String showBallotResults() {
@@ -107,7 +105,7 @@ public class Management {
 		for (int i = 0; i < boxes.size(); i++) 
 			sb.append(boxes.get(i).toString());
 		return sb.toString();
-		
+
 	}
 
 	///////////
@@ -183,10 +181,10 @@ public class Management {
 			
 		}
 	}
-////aviad/////
-	public void addParty(String name, eFlow flow, Date dateOfCreation) {
+	
+	public void addParty(String name, String flow, Date dateOfCreation) {
 		ArrayList<Contender> contenders = new ArrayList<Contender>();
-		Party p = new Party(name, flow.name(), dateOfCreation + "", contenders);
+		Party p = new Party(name, flow, dateOfCreation + "", contenders);
 		parties.add(p);
 	}
 
@@ -216,6 +214,30 @@ public class Management {
 		for (int i = 0; i < boxes.size(); i++)
 			boxes.get(i).vote();
 	}
+	
+
+	
+	/////6/////
+	public String viewAllCitizens() {
+		String str="";
+			for (int i = 0; i < citizens.size(); i++)
+				str+=(citizens.get(i).toString());
+		return str;
+	}
+
+	//////
+	public  String showParties() {
+		String str="";
+		for (int i = 0; i < parties.size(); i++)
+			str+=(parties.get(i).toString());
+		return str;
+	}
+	///////////
+	public void CreateNewElection() {
+		
+		
+	}
+
 
 
 

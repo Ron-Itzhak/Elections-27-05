@@ -1,23 +1,22 @@
 package Controller;
 
-import listeners.ElectionsListenable;
 import listeners.ViewListenable;
 import Model.Date;
 import Model.Model;
 import Model.Party.eFlow;
 import View.View;
 
-public class Controller implements ViewListenable,ElectionsListenable {
+public class Controller implements ViewListenable {
 	private Model theModel;
 	private View theView;
 
-	public	Controller(Model m, View v) throws Exception {
+	public Controller(Model m, View v) throws Exception {
+		
 		theModel = m;
 		theView = v;
-
-
 		theModel.registerListener(this);
-		theView.registerListener(this);	}
+		theView.registerListener(this);	
+		}
 
 
 
@@ -48,7 +47,7 @@ public class Controller implements ViewListenable,ElectionsListenable {
 
 
 	@Override
-	public void addParty(String name, eFlow flow, Date dateOfCreation) {
+	public void addParty(String name, String flow, Date dateOfCreation) {
 		theModel.addParty(name, flow, dateOfCreation);
 
 	}
@@ -65,7 +64,7 @@ public class Controller implements ViewListenable,ElectionsListenable {
 
 	@Override
 	public void addContenderToParty(String name, int id, int year, boolean qurantine, int numOfSick, boolean carryWeapon, String type, String partyBelonging) throws Exception {
-			boolean exist = true;
+			//boolean exist = true;
 			theModel.addCitizen(name, id, year, qurantine, numOfSick, carryWeapon, type); 
 			addExistingContenderToParty(id, partyBelonging, true);
 		
@@ -78,5 +77,30 @@ public class Controller implements ViewListenable,ElectionsListenable {
 		return theModel.showBallotResults();
 	}
 
+
+
+	@Override
+	public String viewAllCitizens() {
+		return theModel.viewAllCitizens();
+	}
+
+
+
+	@Override
+	public String viewAllParties() {
+		return theModel.showParties();
+	}
+
+
+
+	@Override
+	public String viewResults() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
 
 }
