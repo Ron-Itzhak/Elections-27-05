@@ -1,10 +1,8 @@
 package Controller;
 
-import javafx.event.ActionEvent;
 import listeners.ElectionsListenable;
 import listeners.ViewListenable;
 import Model.Date;
-import Model.Management;
 import Model.Model;
 import Model.Party.eFlow;
 import View.View;
@@ -71,6 +69,13 @@ public class Controller implements ViewListenable,ElectionsListenable {
 			theModel.addCitizen(name, id, year, qurantine); 
 			addExistingContenderToParty(id, partyBelonging, true);
 		
+	}
+
+
+
+	@Override
+	public String viewAllBallots() {
+		return theModel.showBallotResults();
 	}
 
 

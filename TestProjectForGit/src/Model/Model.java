@@ -18,6 +18,8 @@ public class Model {
 	public void registerListener(ElectionsListenable listener) {
 		listeners.add(listener);
 	}
+	
+	
 	////1//////
 	public void addBallotBox(String adress,String type) {
 		m.addBallotBoxMVC(adress,type);
@@ -44,8 +46,10 @@ public class Model {
 	public void addExistingContenderToParty(int id, String partyBelonging, boolean isExist) throws Exception {
 		m.addContender(id, partyBelonging, isExist);
 
-	
-
 	}
-
+//5////
+	public String showBallotResults() {
+		return m.showBallotResults();
+	}
+	////
 }

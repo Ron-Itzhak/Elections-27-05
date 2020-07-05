@@ -98,6 +98,23 @@ public class Management {
 	/////2////////
 
 	////////
+	
+	
+	
+	/////5///
+	public String  showBallotResults() {
+		StringBuffer sb = new StringBuffer();
+		String str= "";
+		for (int i = 0; i < boxes.size(); i++) 
+			sb.append(i + "\n");
+		//str+=boxes.get(i).toString() + "\n";}
+		return sb.toString();
+		
+	}
+
+	///////////
+	
+	
 	public ArrayList<Citizen> getNewContenderList() {
 		ArrayList<Citizen> list = new ArrayList<Citizen>();
 		return list;
@@ -143,10 +160,10 @@ public class Management {
 		boxes.add(b);
 	}
 	
-	public void addCitizen(String name, int id, boolean yearOfBorn, boolean inQuarantine, String type) {
+	public void addCitizen(String name, int id, int yearOfBorn, boolean inQuarantine, String type) {
 		
 	}
-
+///aviad
 	public void addContender(int id, String partyBelonging, boolean isExist) throws Exception {
 		if (isExist) {
 			for (int i = 0; i < citizens.size(); i++) {
@@ -168,7 +185,7 @@ public class Management {
 			
 		}
 	}
-
+////aviad/////
 	public void addParty(String name, eFlow flow, Date dateOfCreation) {
 		ArrayList<Contender> contenders = new ArrayList<Contender>();
 		Party p = new Party(name, flow.name(), dateOfCreation + "", contenders);

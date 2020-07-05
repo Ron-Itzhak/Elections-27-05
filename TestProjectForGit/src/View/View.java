@@ -40,7 +40,7 @@ public class View {
 	protected BorderPane bpRoot;
 	protected Image ima = new Image("file:Files/Toplabel.jpg");
 	protected ImageView imgv = new ImageView(ima);
-	protected VBox vbRoot,VBoxAddBallot,VboxAddCitizen;
+	private VBox vbRoot,VBoxAddBallot,VboxAddCitizen;
 
 	private AbButton Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9, Button10;
 	private Label lblEnterName;
@@ -162,7 +162,7 @@ public class View {
 		Button2 = new AbButton("Adding Citizen",imgv2);
 		Citizen= new Label("You chose to add a new citizen");
 		Label lblCitizenType = new Label("What is the type of citizen");
-		ComboBox cmbCitizenType = new ComboBox<String>();
+		ComboBox<String> cmbCitizenType = new ComboBox<String>();
 		cmbCitizenType.getItems().addAll("SickCitizen", "Soldier", "SickSoldier", "Citizen");
 		Label name = new Label("Enter Name:");
 		TextField nametext = new TextField();
@@ -255,7 +255,7 @@ public class View {
 	  	Label lblSickDays = new Label("How many sick days -if you are not sick you will record 0:");
 		TextField tfSickDays = new TextField();
 		AbButton btSubmit4 = new AbButton("Submit");
-		VBox VboxAddContender = new VBox(lblName,tfConName,lblID,tfID,lblYear,tfYear,lblNameP,tfNameP,lblSickDays,tfSickDays,btSubmit4);
+		VBox VboxAddContender = new VBox(lblCitizen,tfCitizen,lblName,tfConName,lblID,tfID,lblYear,tfYear,lblNameP,tfNameP,lblSickDays,tfSickDays,btSubmit4);
 		Button4.setOnAction(e -> bpRoot.setCenter(VboxAddContender));
 
 		btSubmit4.setOnAction(new EventHandler<ActionEvent>() {
@@ -277,17 +277,19 @@ public class View {
 		
 
 		
-////////5//////
+//////5//////
 		Button5 = new AbButton("Showing Ballot Boxes results",imgv5);
-		
-		Text allBallots = new Text();
-		allBallots.setText(listeners.get(0).viewAllBallots());
 
-///////////////
+		Text allBallots = new Text();
+		//allBallots.setText(listeners.get(0).viewAllBallots());
+		Button5.setOnAction(e -> bpRoot.setCenter(allBallots));
+
+
+/////////////
 		Button6 = new AbButton("Showing all the Citizens",imgv6);
 
 
-        AbButton Button7 = new AbButton("Showing all the Parties",imgv7);
+        Button7 = new AbButton("Showing all the Parties",imgv7);
 		Button8 = new AbButton("Setting New Election",imgv8);
 		Button9 = new AbButton("Showing The last Election results",imgv9);
 
@@ -298,9 +300,7 @@ public class View {
 		Button10 = new AbButton("exit");
 		Button10.setOnAction(e -> Platform.exit());
 		/////////
-	
-		vbRoot.getChildren().addAll(Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9,
-				Button10);
+		vbRoot.getChildren().addAll(Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9,Button10);
 
 		text0 = new Text("Welcome To Aviad And Ron Project ");
 		text0.setFill(Color.WHEAT);
