@@ -102,12 +102,10 @@ public class Management {
 	
 	
 	/////5///
-	public String  showBallotResults() {
-		StringBuffer sb = new StringBuffer();
-		String str= "";
+	public String showBallotResults() {
+		StringBuffer sb = new StringBuffer("You chose to see the ballot boxes results-\n");
 		for (int i = 0; i < boxes.size(); i++) 
-			sb.append(i + "\n");
-		//str+=boxes.get(i).toString() + "\n";}
+			sb.append(boxes.get(i).toString());
 		return sb.toString();
 		
 	}
@@ -160,7 +158,7 @@ public class Management {
 		boxes.add(b);
 	}
 	
-	public void addCitizen(String name, int id, int yearOfBorn, boolean inQuarantine, String type) {
+	public void addCitizen(String name, int id, int yearOfBorn, boolean inQuarantine, int numOfSick, boolean carryWeapon, String type) {
 		
 	}
 ///aviad
