@@ -88,15 +88,14 @@ public class View {
 	
 		/////// 1 Add Ballot /////////////////////////
 		Button1 = new AbButton("Adding Ballot Box",imgv1);
-        Button1.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
-
+        //Button1.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
 		Button1.setMaxWidth(250.0);
-		Button1.setBackground(new Background (new BackgroundFill(Color.WHITE, null, null )));
-
-
+		//Button1.setBackground(new Background (new BackgroundFill(Color.WHITE, null, null )));
 		Label SelectedBallot = new Label("You chose to add a new ballot Box"); 
 		Label SelectedBallot2 = new Label("Which Ballot box would you like to add?");
 		BallotBoxType = new ComboBox<String>();
+		BallotBoxType.setMaxWidth(250.0);
+
 		BallotBoxType.getItems().addAll("SickCitizen", "Soldier", "SickSoldier", "Citizen");
 		Label address = new Label("Enter city:");
 		adresstext = new TextField();
@@ -107,44 +106,31 @@ public class View {
 		VBoxAddBallot = new VBox(SelectedBallot,SelectedBallot2,BallotBoxType);
 		Button1.setOnAction(e -> bpRoot.setCenter(VBoxAddBallot));
 
-//		BallotBoxType.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent action) { 
-//		for (ViewListenable l : listeners)
-//			l.addBallotBox(BallotBoxType.getValue().toString(),adresstext.getText());
-//				}
-//		});
 		
-		
-		
-//		if(adresstext.getText().isEmpty()) {
-//		JOptionPane.showMessageDialog(null,
-//				" Please fill the blank textfield ");
-//
-//	}
-//	else {}
 		
 		
 		
 		SubmitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent action) {
+				if(adresstext.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							" Please fill the blank textfield ");
 
+				}
+				else {
 				JOptionPane.showMessageDialog(null,
 						" The Ballot Box Of " + adresstext.getText() + " Added Successfully  ");
 
-//				for (ViewListenable l : listeners)
-//					l.addBallotBox(BallotBoxType.getValue().toString(), adresstext.getText());
-			}
+				for (ViewListenable l : listeners)
+					l.addBallotBox(BallotBoxType.getValue().toString(), adresstext.getText());
+			}}
 		});
 		VBoxAddBallot.getChildren().add(adressBox);
 
 		//	.setOnAction(e -> JOptionPane.showMessageDialog(null,
 		//	" The Ballot Box Of " + adresstext.getText() + " Added Successfully  "));
-		// setOnAction(e -> JOptionPane.showMessageDialog(null, " Bibi Is the King !"));
-
-		// JOptionPane.showMessageDialog(null, " Bibi Is the King !")
-		
+		// setOnAction(e -> JOptionPane.showMessageDialog(null, "Text"));		
 		
 		
 		///// try of picture in button
@@ -164,6 +150,7 @@ public class View {
 		Label lblCitizenType = new Label("What is the type of citizen");
 		ComboBox<String> cmbCitizenType = new ComboBox<String>();
 		cmbCitizenType.getItems().addAll("SickCitizen", "Soldier", "SickSoldier", "Citizen");
+		cmbCitizenType.setMaxWidth(250.0);
 		Label name = new Label("Enter Name:");
 		TextField nametext = new TextField();
 		nametext.setMaxWidth(250.0);
@@ -174,25 +161,32 @@ public class View {
 		TextField yeartext = new TextField();
 		yeartext.setMaxWidth(250.0);
 		Label quarntinelbl = new Label("Enter quarntine true or false:");
-		TextField quarntinetext = new TextField();
-		quarntinetext.setMaxWidth(250.0);
+		ComboBox<String> cmbQuarntineType = new ComboBox<String>();
+		cmbQuarntineType.getItems().addAll("true", "false");
+		cmbQuarntineType.setMaxWidth(250.0);
 
 
 		AbButton SubmitButton2 = new AbButton("Submit");
 
-		VboxAddCitizen = new VBox(Citizen,lblCitizenType,cmbCitizenType,name,nametext,idlbl,idtext,yearlbl,yeartext,quarntinelbl,quarntinetext,SubmitButton2);
+		VboxAddCitizen = new VBox(Citizen,lblCitizenType,cmbCitizenType,name,nametext,idlbl,idtext,yearlbl,yeartext,quarntinelbl,cmbQuarntineType,SubmitButton2);
 		Button2.setOnAction(e -> bpRoot.setCenter(VboxAddCitizen));
 		//VboxAddCitizen.setAlignment(Pos.CENTER_LEFT);
 		
 		SubmitButton2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent action) {
+				if(nametext.getText().isEmpty()|| idtext.getText().isEmpty()||yeartext.getText().isEmpty()||cmbQuarntineType.getValue().isEmpty()||cmbCitizenType.getValue().isEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							" Please fill the blank textfields ");
+
+				}
+				else {
 				JOptionPane.showMessageDialog(null,
 						" The Citizen  " + nametext.getText() + " Added Successfully  ");
 
 				for (ViewListenable l : listeners)
-					l.addCitizen(nametext.getText(), Integer.parseInt(idtext.getText()),Integer.parseInt(yeartext.getText()),Boolean.parseBoolean(quarntinetext.getText()),cmbCitizenType.getValue());
-			}
+					l.addCitizen(nametext.getText(), Integer.parseInt(idtext.getText()),Integer.parseInt(yeartext.getText()),Boolean.parseBoolean(cmbQuarntineType.getValue()),cmbCitizenType.getValue());
+			}}
 		});
 
 		/////
@@ -241,7 +235,9 @@ public class View {
 		
 		Button4 = new AbButton("Adding Contender to Party",imgv4);
 		Label lblCitizen = new Label("Is He Already Citizen ?");
-		TextField tfCitizen= new TextField();
+		ComboBox<String> cmbCitizenChoice = new ComboBox<String>();
+		cmbCitizenChoice.getItems().addAll("true", "false");
+		cmbCitizenChoice.setMaxWidth(250.0);
 		Label lblName = new Label("Name:");
 		TextField tfConName = new TextField();
 		Label lblID = new Label("ID:");
@@ -255,7 +251,19 @@ public class View {
 	  	Label lblSickDays = new Label("How many sick days -if you are not sick you will record 0:");
 		TextField tfSickDays = new TextField();
 		AbButton btSubmit4 = new AbButton("Submit");
-		VBox VboxAddContender = new VBox(lblCitizen,tfCitizen,lblName,tfConName,lblID,tfID,lblYear,tfYear,lblNameP,tfNameP,lblSickDays,tfSickDays,btSubmit4);
+		VBox VboxAddContender = new VBox(lblCitizen,cmbCitizenChoice);
+		cmbCitizenChoice.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if(cmbCitizenChoice.getValue().equals("true")) {
+					 VboxAddContender.getChildren().addAll(lblName,tfConName,lblID,tfID,lblYear,tfYear,lblNameP,tfNameP,lblSickDays,tfSickDays,btSubmit4);
+					JOptionPane.showMessageDialog(null, "Party added successfuly!");
+				}
+
+				
+			}
+		});		
+
 		Button4.setOnAction(e -> bpRoot.setCenter(VboxAddContender));
 
 		btSubmit4.setOnAction(new EventHandler<ActionEvent>() {
