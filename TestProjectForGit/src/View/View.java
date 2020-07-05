@@ -288,8 +288,7 @@ public class View {
 //////5//////
 		Button5 = new AbButton("Showing Ballot Boxes results",imgv5);
 
-		Text allBallots = new Text();
-		//allBallots.setText(listeners.get(0).viewAllBallots());
+		Text allBallots = new Text(listeners.get(0).viewAllBallots());
 		Button5.setOnAction(e -> bpRoot.setCenter(allBallots));
 
 
