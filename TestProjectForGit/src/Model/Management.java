@@ -63,6 +63,10 @@ public class Management {
 		boxes.add(sickCitizensBallot);
 		boxes.add(soldiersBallot);
 		boxes.add(sickSoldiersBallot);
+		
+		Election hardcodedelc = new Election(5,2020,citizens,parties,boxes);
+		elections.add(hardcodedelc);
+
 		for (int i = 0; i < citizens.size(); i++) {
 
 			if (citizens.get(i).getClass() == Soldier.class)
@@ -206,9 +210,6 @@ public class Management {
 		return -1;
 	}
 
-	//	public void addCitizenToBallotBox(Citizen c, int boxId) {
-	//		boxes.get(boxId).getVoters().add(c);
-	//	}
 
 	public void election() {
 		for (int i = 0; i < boxes.size(); i++)
@@ -233,9 +234,13 @@ public class Management {
 		return str;
 	}
 	///////////
-	public void CreateNewElection() {
-		
-		
+	public void CreateNewElection(int month,int year) {
+		 Election e = new Election(month,year,citizens,parties,boxes);
+		 elections.add(e);
+	}
+
+	public String viewLastResults() {
+		return elections.get(elections.size()-1).toString();
 	}
 
 

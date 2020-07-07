@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class Election {
 	private int month, year;
-	private ArrayList<Citizen> citizens;
+	private Set<Citizen> citizens;
 	private ArrayList<Party> parties;
 	private ArrayList<BallotBox> boxes;
 	private String result;
 
-	public Election(int month, int year, ArrayList<Citizen> citizens, ArrayList<Party> parties,
+	public Election(int month, int year, Set<Citizen> citizens, ArrayList<Party> parties,
 			ArrayList<BallotBox> boxes) {
 		setMonth(month);
 		this.year = year;
-		this.citizens = new ArrayList<Citizen>();
+		this.citizens = new Set<Citizen>();
 		for (int i = 0; i < citizens.size(); i++)
-			this.citizens.add(i, citizens.get(i));
+			this.citizens.addData(i, citizens.get(i));
 		this.parties = new ArrayList<Party>();
 		for (int i = 0; i < parties.size(); i++)
 			this.parties.add(i, parties.get(i));

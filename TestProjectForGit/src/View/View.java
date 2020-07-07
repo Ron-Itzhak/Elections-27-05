@@ -53,8 +53,6 @@ public class View {
 	private ComboBox<String> BallotBoxType;
 
 	public View(Stage primaryStage) {
-		//Date todays = (Date) Calendar.getInstance().getTime();
-
 		Today= new Date(-1780, 6, 5);
 		listeners = new ArrayList<ViewListenable>();
 		primaryStage.setTitle("Elections");
@@ -67,7 +65,6 @@ public class View {
 		vbRoot.setPadding(new Insets(10));
 		vbRoot.setSpacing(10);
 		bpRoot.setLeft(vbRoot);
-
 		Scene scene = new Scene(bpRoot, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -77,18 +74,13 @@ public class View {
 		ImageView imgv1 = new ImageView(ballot);
 		ImageView imgv2 = new ImageView("file:Files/person.jpg");
 		ImageView imgv3 = new ImageView("file:Files/Party.jpg");
-
 		ImageView imgv4 = new ImageView("file:Files/person.jpg");
 		ImageView imgv6 = new ImageView("file:Files/person.jpg");
 		ImageView imgv7 = new ImageView("file:Files/Party.jpg");
 		ImageView imgv8 = new ImageView("file:Files/Vote.jpg");
-
 		ImageView imgv5 = new ImageView("file:Files/ElectionResult.jpg");
 		ImageView imgv9 = new ImageView("file:Files/ElectionResult.jpg");
 
-
-
-	
 		/////// 1 Add Ballot /////////////////////////
 		Button1 = new AbButton("Adding Ballot Box",imgv1);
 		Button1.setMaxWidth(250.0);
@@ -112,19 +104,15 @@ public class View {
 				if(adresstext.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null,
 							" Please fill the blank textfield ");
-
 				}
 				else {
+					System.out.println("first step");
 				JOptionPane.showMessageDialog(null,
 						" The Ballot Box Of " + adresstext.getText() + " Added Successfully  ");
 				listeners.get(0).addBallotBox( adresstext.getText(),BallotBoxType.getValue().toString());
+
 			}}
 		});
-
-		//	.setOnAction(e -> JOptionPane.showMessageDialog(null,
-		//	" The Ballot Box Of " + adresstext.getText() + " Added Successfully  "));
-		// setOnAction(e -> JOptionPane.showMessageDialog(null, "Text"));		
-		
 		//////2  add citizen //////////
 		Button2 = new AbButton("Adding Citizen",imgv2);
 		Citizen= new Label("You chose to add a new citizen");
@@ -150,11 +138,7 @@ public class View {
 		AbButton SubmitButton2 = new AbButton("Submit");
 
 		VboxAddCitizen = new VBox(Citizen,lblCitizenType,cmbCitizenType,name,nametext,idlbl,idtext,yearlbl,yeartext,quarntinelbl,cmbQuarntineType,SubmitButton2);
-		Button2.setOnAction(e -> bpRoot.setCenter(VboxAddCitizen));
-		//VboxAddCitizen.setAlignment(Pos.CENTER_LEFT);
-		
-		//cmbQuarntineType.setOnAction(arg0);
-		
+		Button2.setOnAction(e -> bpRoot.setCenter(VboxAddCitizen));		
 		SubmitButton2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent action) {
@@ -167,8 +151,8 @@ public class View {
 				JOptionPane.showMessageDialog(null,
 						" The Citizen  " + nametext.getText() + " Added Successfully  ");
 
-				//for (ViewListenable l : listeners)
-					//l.addCitizen(nametext.getText(), Integer.parseInt(idtext.getText()),Integer.parseInt(yeartext.getText()),Boolean.parseBoolean(cmbQuarntineType.getValue()),cmbCitizenType.getValue());
+				for (ViewListenable l : listeners)
+					l.addCitizen(nametext.getText(), Integer.parseInt(idtext.getText()),Integer.parseInt(yeartext.getText()),Boolean.parseBoolean(cmbQuarntineType.getValue()),0, false, cmbCitizenType.getValue());
 			}}
 		});
 
@@ -212,14 +196,7 @@ public class View {
 					l.addParty(tfName.getText(), cmbFactionChoice.getValue(),Today);
 				JOptionPane.showMessageDialog(null, "Party added successfuly!");
 			}}
-		});
-		
-		
-		
-		
-		
-		
-		
+		});	
 ////4///////
 		
 		Button4 = new AbButton("Adding Contender to Party",imgv4);
@@ -274,26 +251,17 @@ public class View {
 		Button5 = new AbButton("Showing Ballot Boxes results",imgv5);
 
 		Text allBallots = new Text();
-		//String str = listeners.get(0).viewAllBallots();
-		//allBallots.setText(str);
-		//allBallots.setText(listeners.get(0).viewAllCitizens());
-
 		//Button5.setOnAction(e -> bpRoot.setCenter(allBallots));
 		Button5.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent event) {
 				for (ViewListenable l : listeners)
 					//JOptionPane.showMessageDialog(null,l.viewAllCitizens());
 					allBallots.setText(l.viewAllBallots());
 
-				bpRoot.setCenter(allBallots);
-				
-						}
-		});
-
-
-
+				bpRoot.setCenter(allBallots);			
+						}});
+		
 		/////////////6/////
 		Button6 = new AbButton("Showing all the Citizens",imgv6);
 		Text allCitizens = new Text();
@@ -333,35 +301,51 @@ public class View {
 			//////////////////
 
         
-        
-		Button8 = new AbButton("Setting New Election",imgv8);
+		/////////8/////
 
+		Button8 = new AbButton("Setting New Election",imgv8);
+		Label lblelection= new Label("You chose to Set a new Election Round");
+		Label lblelectionMonth= new Label("What is the year");
+		TextField tfmonth = new TextField();
+		tfmonth.setMaxWidth(250);
+		Label lblelectionYear = new Label("What is the month");
+		TextField tfelcYear = new TextField();
+		tfelcYear.setMaxWidth(250);
+		AbButton btSubmit8 = new AbButton("Submit");
+		VBox vbelc= new VBox (lblelection,lblelectionMonth,tfmonth,lblelectionYear,tfelcYear,btSubmit8);
+		Button8.setOnAction(e -> bpRoot.setCenter(vbelc));
+		btSubmit8.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				
+			for (ViewListenable l : listeners)
+					l.CreateNewElection(Integer.parseInt(tfmonth.getText()), Integer.parseInt(tfelcYear.getText()));
+				JOptionPane.showMessageDialog(null, "New election added successfuly!");
+			}
+		});
+
+
+		////////
 		
 		/////////9/////
 		Button9 = new AbButton("Showing The last Election results",imgv9);
-		Text txtElection = new Text("a");
-//		txtElection.setText(listeners.get(0).viewResults());
-		
-		Button9.setOnAction(e -> bpRoot.setCenter(txtElection));
-
-		/////////////////
-
-        
-        
-        
-        //// 10///
+		Text viewResults = new Text();		
+		Button9.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				for (ViewListenable l : listeners)
+					viewResults.setText(l.viewLastResults());
+				bpRoot.setCenter(viewResults);
+				
+						}
+		});
+        ////10///
 		Button10 = new AbButton("exit");
 		Button10.setOnAction(e -> Platform.exit());
 		/////////
 		vbRoot.getChildren().addAll(Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9,Button10);
-
-		text0 = new Text("Welcome To Aviad And Ron Project ");
-		text0.setFill(Color.WHEAT);
-		text0.setFont(new Font("Times New Roman", 20));
-		lblEnterName = new Label("Enter Name: ");
-
 	}
-
 	public void registerListener(ViewListenable newListener) {
 		listeners.add(newListener);
 		System.out.println(listeners.size());

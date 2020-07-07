@@ -94,9 +94,15 @@ public class Controller implements ViewListenable {
 
 
 	@Override
-	public String viewResults() {
-		// TODO Auto-generated method stub
-		return null;
+	public String viewLastResults() {
+		return theModel.viewLastResults();
+	}
+
+
+
+	@Override
+	public void CreateNewElection(int month, int year) {
+		theModel.CreateNewElection(month,year);
 	}
 
 

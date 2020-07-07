@@ -21,6 +21,9 @@ public interface ViewListenable {
 
 	String viewAllParties();
 
-	String viewResults();
+	
+	void CreateNewElection(int month,int year);
+	
+	String viewLastResults();
 
 }

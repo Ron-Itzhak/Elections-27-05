@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Controller.Controller;
 import Model.Party.eFlow;
-import listeners.ElectionsListenable;
 import listeners.ViewListenable;
 
 public class Model {
@@ -68,5 +67,15 @@ public class Model {
 	public String showParties() {
 		return	m.showParties();
  	}
+
+
+	public void CreateNewElection(int month,int year) {
+		m.CreateNewElection(year, month);		
+	}
+
+
+	public String viewLastResults() {
+return m.viewLastResults();	
+}
 	
 }
